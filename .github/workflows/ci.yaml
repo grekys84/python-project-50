@@ -42,6 +42,6 @@ jobs:
             -Dsonar.projectKey=hexlet-gendiff-project
             -Dsonar.organization=grekys84
             -Dsonar.sources=hexlet_code/
-            -Dsonar.tests=tests
+            -Dsonar.tests=hexlet_code/tests
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.python.version=3.14
