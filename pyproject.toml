@@ -7,7 +7,7 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-gendiff = "hexlet_code.scripts.gendiff:main"
+gendiff = "hexlet_code.gendiff:main"
 
 [tool.uv]
 package = true
@@ -18,3 +18,27 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["gendiff"]
+
+# Зависимости разработки
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.15.11",
+    "pytest>=9.0.3",
+]
+
+# Настройки Ruff
+[tool.ruff]
+line-length = 79
+preview = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "C90"]
+
+[lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.11",
+]
