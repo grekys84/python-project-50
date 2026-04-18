@@ -97,7 +97,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
     return "\n".join(lines)
 
 
-def format_value(value, depth: int) -> str:
+def format_value(value) -> str:
     """
     Форматирует значение для отображения в диффе.
 
@@ -105,9 +105,6 @@ def format_value(value, depth: int) -> str:
         value: Значение, которое необходимо подготовить для отображения
                 в диффе. Может быть как простым типом (str, int, bool, None),
                 так и словарем с вложенными значениями.
-        depth: Текущий уровень вложенности. Используется для расчета
-            отступов при форматировании словарей.
-
     Returns:
         Строка, содержащая отформатированное представление.
 
