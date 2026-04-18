@@ -24,6 +24,7 @@ packages = ["gendiff"]
 dev = [
     "ruff>=0.15.11",
     "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
 ]
 
 # Настройки Ruff
@@ -40,5 +41,6 @@ select = ["E", "F", "I", "C90"]
 [dependency-groups]
 dev = [
     "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
     "ruff>=0.15.11",
 ]
