@@ -71,22 +71,22 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
         # Форматируем строку в зависимости от статуса узла
         if status == 'added':
             # Значение добавлено во второй файл (+)
-            line = f"{current_indent}+ {key}: {format_value(value)}"
+            line = f"{current_indent}+ {key}: {format_value(value, depth)}"
         elif status == 'removed':
             # Значение удалено из первого файла (-)
-            line = f"{current_indent}- {key}: {format_value(value)}"
+            line = f"{current_indent}- {key}: {format_value(value, depth)}"
         elif status == 'updated':
             # Значение обновилось: сначала старое (-), потом новое (+)
             old_value = node['old_value']
-            line_old = f"{current_indent}- {key}: {format_value(old_value)}"
-            line_new = f"{current_indent}+ {key}: {format_value(value)}"
+            line_old = f"{current_indent}- {key}: {format_value(old_value, depth)}"
+            line_new = f"{current_indent}+ {key}: {format_value(value, depth)}"
             lines.append(line_old)
             lines.append(line_new)
             # Пропускаем добавление одной строки, так как добавили две
             continue
         elif status == 'unchanged':
             # Значение не изменилось
-            line = f"{current_indent}  {key}: {format_value(value)}"
+            line = f"{current_indent}  {key}: {format_value(value, depth)}"
         else:
             # Неожиданный статус
             line = f"{current_indent}  {key}: <неизвестный_статус_{status}>"
@@ -97,7 +97,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
     return "\n".join(lines)
 
 
-def format_value(value) -> str:
+def format_value(value, depth=0) -> str:
     """
     Форматирует значение для отображения в диффе.
 
@@ -105,6 +105,8 @@ def format_value(value) -> str:
         value: Значение, которое необходимо подготовить для отображения
                 в диффе. Может быть как простым типом (str, int, bool, None),
                 так и словарем с вложенными значениями.
+        depth: Текущий уровень вложенности (для рекурсивного форматирования словарей).
+               По умолчанию 0.
     Returns:
         Строка, содержащая отформатированное представление.
 
