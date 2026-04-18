@@ -1,4 +1,4 @@
-.PHONY: install lint test check test-coverage test-coverage-html
+.PHONY: install lint format test check test-coverage test-coverage-html check clean
 
 # Установка зависимостей через uv
 install:
@@ -6,11 +6,11 @@ install:
 
 # Запуск проверки
 lint:
-	uv run ruff check hexlet_code scripts tests
+	uv run ruff check hexlet_code
 
 # Запуск форматирования
 format:
-	uv run ruff format hexlet_code scripts tests
+	uv run ruff format hexlet_code
 
 # Запуск тестов
 test:
@@ -19,7 +19,7 @@ test:
 # Базовый coverage (XML + консоль)
 test-coverage:
 	# Запускаем pytest с плагином coverage, генерируем lcov и xml отчеты
-	uv run pytest --cov=gendiff --cov-report=xml --cov-report=term-missing
+	uv run pytest --cov=hexlet_code --cov-report=xml --cov-report=term-missing
 
 # HTML отчет для детального просмотра
 test-coverage-html:
@@ -28,8 +28,8 @@ test-coverage-html:
 
 # Проверка без исправлений (для CI)
 check:
-	uv run ruff check gendiff tests
-	uv run ruff format --check gendiff tests
+	uv run ruff check hexlet_code
+	uv run ruff format --check hexlet_code
 
 # Очистка временных файлов
 clean:
