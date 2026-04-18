@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 from hexlet_code.gendiff import generate_diff
 
@@ -14,7 +14,8 @@ def get_fixture_path(filename: str) -> str:
         str: Полный путь до файла.
 
     """
-    return os.path.join('tests', 'test_data', filename)
+    current_dir = Path(__file__).parent
+    return str(current_dir / 'test_data' / filename)
 
 
 def read_fixture(filename: str) -> str:
