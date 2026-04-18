@@ -6,7 +6,7 @@ install:
 
 # Запуск линтера
 lint:
-	uv run ruff gendiff scripts
+	uv run ruff tests scripts
 
 # Запуск тестов
 test:
