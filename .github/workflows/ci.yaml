@@ -1,4 +1,4 @@
-name: Python CI
+name: Hexlet CI
 
 on:
   - push
@@ -23,15 +23,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          make install
+          uv sync --group dev
 
       - name: Run linter and pytest
         run: |
-          make check
+          uv run ruff check hexlet_code scripts tests
 
       - name: Run test coverage
         run: |
-          make test-coverage
+          uv run pytest --cov=gendiff --cov-report=xml --cov-report=term-missing
 
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v7
@@ -44,3 +44,4 @@ jobs:
             -Dsonar.sources=gendiff
             -Dsonar.tests=tests
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.python.version=3.14
