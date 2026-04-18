@@ -45,3 +45,4 @@ jobs:
             -Dsonar.tests=hexlet_code/tests
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.python.version=3.14
+            -Dsonar.exclusions=hexlet_code/tests/**,**/__pycache__/**,**/*.pyc
