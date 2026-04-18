@@ -1,13 +1,15 @@
 import argparse
 
+from hexlet_code.scripts.diff_builder import generate_diff
+
+
 def main():
-    """
-    Главная функция точки входа.
-    """
+    """Главная функция точки входа."""
     parser = argparse.ArgumentParser(
-        prog='gendiff', # Имя программы
-        description='Сравнивает два конфигурационных файла и показывает разницу.',
-        add_help = False
+        prog='gendiff',  # Имя программы
+        description='Сравнивает два конфигурационных'
+                    ' файла и показывает разницу.',
+        add_help=False
     )
     # Добавляем позиционные аргументы
     parser.add_argument('first_file',
@@ -21,12 +23,18 @@ def main():
         help='Показать справку и выйти'
     )
     parser.add_argument('-f', '--format',
-                        default='stylish',  # Установим 'stylish' как формат по умолчанию, если не указан
+                        default='stylish',
                         metavar='{FORMAT}',
-                        help='Выберите формат вывода (По умолчанию: %(default)s)'
+                        help='Выберите формат вывода '
+                             '(По умолчанию: %(default)s)'
     )
 
     args = parser.parse_args()
+
+    # Вызываем функцию сравнения и печатаем результат
+    diff_result = generate_diff(args.first_file, args.second_file)
+    print(diff_result)
+
 
 if __name__ == '__main__':
     main()
