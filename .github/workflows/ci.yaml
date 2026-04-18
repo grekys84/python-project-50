@@ -39,7 +39,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
-            -Dsonar.projectKey=python-project-50
+            -Dsonar.projectKey=grekys84_python-project-50
             -Dsonar.organization=grekys84
             -Dsonar.sources=hexlet_code/
             -Dsonar.tests=hexlet_code/tests
