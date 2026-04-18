@@ -1,4 +1,4 @@
-# Makefile
+.PHONY: install lint test check test-coverage test-coverage-html
 
 # Установка зависимостей через uv
 install:
@@ -26,4 +26,12 @@ test-coverage-html:
 	uv run pytest --cov=gendiff --cov-report=html --cov-report=term-missing
 	@echo "HTML coverage report generated in htmlcov/"
 
-.PHONY: install lint test check test-coverage test-coverage-html
+# Проверка без исправлений (для CI)
+check:
+	uv run ruff check gendiff tests
+	uv run ruff format --check gendiff tests
+
+# Очистка временных файлов
+clean:
+	rm -rf .pytest_cache .coverage coverage.xml htmlcov .ruff_cache
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
