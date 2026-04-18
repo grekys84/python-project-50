@@ -23,7 +23,7 @@ test-coverage:
 
 # HTML отчет для детального просмотра
 test-coverage-html:
-	uv run pytest --cov=gendiff --cov-report=html --cov-report=term-missing
+	uv run pytest --cov=hexlet_code --cov-report=html --cov-report=term-missing
 	@echo "HTML coverage report generated in htmlcov/"
 
 # Проверка без исправлений (для CI)
