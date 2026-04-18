@@ -14,7 +14,7 @@ def get_fixture_path(filename: str) -> str:
         str: Полный путь до файла.
 
     """
-    return os.path.join('tests', 'fixtures', filename)
+    return os.path.join('tests', 'test_data', filename)
 
 
 def read_fixture(filename: str) -> str:
