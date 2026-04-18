@@ -43,7 +43,7 @@ def build_diff(data1: dict, data2: dict) -> list[dict]:
     return diff
 
 
-def format_diff_stylish(diff_tree: list[dict], depth: int=1) -> str:
+def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
     """
     Форматирует дерево различий в строковое представление 'stylish'.
 
