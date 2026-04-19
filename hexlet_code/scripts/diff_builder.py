@@ -137,7 +137,11 @@ def format_value(value, depth=0) -> str:
     return str(value)
 
 
-def generate_diff(first_file_path: str, second_file_path: str) -> str:
+def generate_diff(
+        first_file_path: str,
+        second_file_path: str,
+        format: str = 'stylish',
+    ) -> str:
     """
     Генерирует дифф между двумя файлами конфигурации.
 
@@ -156,4 +160,5 @@ def generate_diff(first_file_path: str, second_file_path: str) -> str:
     diff_tree = build_diff(data1, data2)
 
     # Форматируем дерево в строку 'stylish'
-    return format_diff_stylish(diff_tree)
+    if format == 'stylish':
+        return format_diff_stylish(diff_tree)

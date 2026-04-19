@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from hexlet_code.gendiff import generate_diff
+from hexlet_code.scripts.diff_builder import generate_diff
 
 
 def get_fixture_path(filename: str) -> str:
@@ -46,6 +46,18 @@ def test_generate_diff_json() -> None:
     file2 = get_fixture_path('file2.json')
     expected = read_fixture('expected_output.txt')
 
-    result = generate_diff(file1, file2)
+    result = generate_diff(file1, file2, format='stylish')
 
     assert result == expected
+
+
+def test_generate_diff_yaml() -> None:
+    """Тестирует сравнение плоских YAML-файлов."""
+    file1 = get_fixture_path('file1.yaml')
+    file2 = get_fixture_path('file2.yaml')
+    expected = read_fixture('expected_output.txt')
+
+    result = generate_diff(file1, file2, format='stylish')
+
+    assert result == expected
+
