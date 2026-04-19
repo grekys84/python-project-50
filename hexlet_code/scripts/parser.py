@@ -1,4 +1,5 @@
 import json
+
 import yaml
 
 def parse_file(filepath: str) -> dict:
