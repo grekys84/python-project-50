@@ -17,7 +17,7 @@ def parse_file(filepath: str) -> dict:
 
     if filepath.endswith('.json'):
         return json.loads(content)
-    elif filepath.endswith('.yaml'):
+    elif filepath.endswith('.yaml') or filepath.endswith('.yml'):
         return yaml.safe_load(content)
     else:
         raise ValueError(f"Не поддерживаемый формат файла: {filepath}")
