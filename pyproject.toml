@@ -35,6 +35,9 @@ preview = true
 [tool.ruff.lint]
 select = ["E", "F", "I", "C90"]
 
+[tool.ruff.format]
+quote-style = "single"  # или "double"
+
 [lint.per-file-ignores]
 "__init__.py" = ["F401"]
 

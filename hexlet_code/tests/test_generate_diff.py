@@ -60,4 +60,3 @@ def test_generate_diff_yaml() -> None:
     result = generate_diff(file1, file2, format='stylish')
 
     assert result == expected
-

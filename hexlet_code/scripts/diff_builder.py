@@ -33,8 +33,8 @@ def build_diff(data1: dict, data2: dict) -> list[dict]:
             diff.append({
                 'key': key,
                 'status': 'updated',
-                'value': value2,      # Новое значение из второго файла
-                'old_value': value1   # Старое значение из первого файла
+                'value': value2,  # Новое значение из второго файла
+                'old_value': value1,  # Старое значение из первого файла
             })
         # Ключ есть в обоих и значения равны - без изменений
         else:
@@ -58,10 +58,10 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
     # Размер одного уровня отступа
     indent_size = 4
     # Вычисляем отступ для текущего уровня
-    current_indent = " " * (depth * indent_size - 2)
-    bracket_indent = " " * ((depth - 1) * indent_size)
+    current_indent = ' ' * (depth * indent_size - 2)
+    bracket_indent = ' ' * ((depth - 1) * indent_size)
     # Начинаем блок фигурной скобкой
-    lines = ["{"]
+    lines = ['{']
 
     for node in diff_tree:
         key = node['key']
@@ -71,31 +71,32 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
         # Форматируем строку в зависимости от статуса узла
         if status == 'added':
             # Значение добавлено во второй файл (+)
-            line = f"{current_indent}+ {key}: {format_value(value, depth)}"
+            line = f'{current_indent}+ {key}: {format_value(value, depth)}'
         elif status == 'removed':
             # Значение удалено из первого файла (-)
-            line = f"{current_indent}- {key}: {format_value(value, depth)}"
+            line = f'{current_indent}- {key}: {format_value(value, depth)}'
         elif status == 'updated':
             # Значение обновилось: сначала старое (-), потом новое (+)
             old_value = node['old_value']
-            line_old = (f"{current_indent}- {key}: "
-                        f"{format_value(old_value, depth)}")
-            line_new = f"{current_indent}+ {key}: {format_value(value, depth)}"
+            line_old = (
+                f'{current_indent}- {key}: {format_value(old_value, depth)}'
+            )
+            line_new = f'{current_indent}+ {key}: {format_value(value, depth)}'
             lines.append(line_old)
             lines.append(line_new)
             # Пропускаем добавление одной строки, так как добавили две
             continue
         elif status == 'unchanged':
             # Значение не изменилось
-            line = f"{current_indent}  {key}: {format_value(value, depth)}"
+            line = f'{current_indent}  {key}: {format_value(value, depth)}'
         else:
             # Неожиданный статус
-            line = f"{current_indent}  {key}: <неизвестный_статус_{status}>"
+            line = f'{current_indent}  {key}: <неизвестный_статус_{status}>'
 
         lines.append(line)
 
-    lines.append(f"{bracket_indent}}}")  # Заканчиваем блок фигурной скобкой
-    return "\n".join(lines)
+    lines.append(f'{bracket_indent}}}')  # Заканчиваем блок фигурной скобкой
+    return '\n'.join(lines)
 
 
 def format_value(value, depth=0) -> str:
@@ -115,33 +116,33 @@ def format_value(value, depth=0) -> str:
     """
     if isinstance(value, dict):
         indent_size = 4
-        current_indent = " " * (depth * indent_size)
-        bracket_indent = " " * ((depth - 1) * indent_size)
+        current_indent = ' ' * (depth * indent_size)
+        bracket_indent = ' ' * ((depth - 1) * indent_size)
 
-        lines = ["{"]
+        lines = ['{']
 
         for key, val in value.items():
             lines.append(
-                f"{current_indent}{key}: {format_value(val, depth + 1)}"
+                f'{current_indent}{key}: {format_value(val, depth + 1)}'
             )
 
-        lines.append(f"{bracket_indent}}}")
-        return "\n".join(lines)
+        lines.append(f'{bracket_indent}}}')
+        return '\n'.join(lines)
 
     if isinstance(value, bool):
         return str(value).lower()
 
     if value is None:
-        return "null"
+        return 'null'
 
     return str(value)
 
 
 def generate_diff(
-        first_file_path: str,
-        second_file_path: str,
-        format: str = 'stylish',
-    ) -> str:
+    first_file_path: str,
+    second_file_path: str,
+    format: str = 'stylish',
+) -> str:
     """
     Генерирует дифф между двумя файлами конфигурации.
 

@@ -8,25 +8,23 @@ def main():
     parser = argparse.ArgumentParser(
         prog='gendiff',  # Имя программы
         description='Сравнивает два конфигурационных'
-                    ' файла и показывает разницу.',
-        add_help=False
+        ' файла и показывает разницу.',
+        add_help=False,
     )
     # Добавляем позиционные аргументы
-    parser.add_argument('first_file',
-                        help='Первый конфигурационный файл')
-    parser.add_argument('second_file',
-                        help='Второй конфигурационный файл')
+    parser.add_argument('first_file', help='Первый конфигурационный файл')
+    parser.add_argument('second_file', help='Второй конфигурационный файл')
 
     # Опциональный аргументы
-    parser.add_argument('-h', '--help',
-        action='help',
-        help='Показать справку и выйти'
+    parser.add_argument(
+        '-h', '--help', action='help', help='Показать справку и выйти'
     )
-    parser.add_argument('-f', '--format',
-                        default='stylish',
-                        metavar='{FORMAT}',
-                        help='Выберите формат вывода '
-                             '(По умолчанию: %(default)s)'
+    parser.add_argument(
+        '-f',
+        '--format',
+        default='stylish',
+        metavar='{FORMAT}',
+        help='Выберите формат вывода (По умолчанию: %(default)s)',
     )
 
     args = parser.parse_args()
