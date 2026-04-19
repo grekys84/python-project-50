@@ -79,7 +79,8 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             value = node['value']
             value_str = format_value(value, depth)
             line = (
-                f'{current_indent}+ {key}:' + (f' {value_str}' if value_str != '' else '')
+                f'{current_indent}+ {key}:' +
+                (f' {value_str}' if value_str != '' else '')
             )
 
         elif status == 'removed':
@@ -87,7 +88,8 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             value = node['value']
             value_str = format_value(value, depth)
             line = (
-                f'{current_indent}- {key}:' + (f' {value_str}' if value_str != '' else '')
+                f'{current_indent}- {key}:' +
+                (f' {value_str}' if value_str != '' else '')
             )
 
         elif status == 'updated':
@@ -98,8 +100,10 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             old_str = format_value(old_value, depth)
             new_str = format_value(new_value, depth)
 
-            line_old = f'{current_indent}- {key}:' + (f' {old_str}' if old_str != '' else '')
-            line_new = f'{current_indent}+ {key}:' + (f' {new_str}' if new_str != '' else '')
+            line_old = (f'{current_indent}- {key}:' +
+                        (f' {old_str}' if old_str != '' else ''))
+            line_new = (f'{current_indent}+ {key}:' +
+                        (f' {new_str}' if new_str != '' else ''))
             lines.append(line_old)
             lines.append(line_new)
             # Пропускаем добавление одной строки, так как добавили две
@@ -107,14 +111,16 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
 
         elif status == 'nested':
             children = node['children']
-            line = f'{current_indent}  {key}: {format_diff_stylish(children, depth + 1)}'
+            line = (f'{current_indent}  {key}: '
+                    f'{format_diff_stylish(children, depth + 1)}')
 
         elif status == 'unchanged':
             # Значение не изменилось
             value = node['value']
             value_str = format_value(value, depth)
             line = (
-                f'{current_indent}  {key}:' + (f' {value_str}' if value_str != '' else '')
+                f'{current_indent}  {key}:' +
+                (f' {value_str}' if value_str != '' else '')
             )
 
         else:
