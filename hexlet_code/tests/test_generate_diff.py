@@ -82,3 +82,23 @@ def test_generate_diff_yaml_nested() -> None:
     result = generate_diff(file1, file2, format_name='stylish')
 
     assert result == expected
+
+
+def test_generate_diff_json_plain() -> None:
+    file1 = get_fixture_path('nested_file1.json')
+    file2 = get_fixture_path('nested_file2.json')
+    expected = read_fixture('expected_output_plain.txt')
+
+    result = generate_diff(file1, file2, format_name='plain')
+
+    assert result == expected
+
+
+def test_generate_diff_json_plain() -> None:
+    file1 = get_fixture_path('nested_file1.yaml')
+    file2 = get_fixture_path('nested_file2.yaml')
+    expected = read_fixture('expected_output_plain.txt')
+
+    result = generate_diff(file1, file2, format_name='plain')
+
+    assert result == expected
