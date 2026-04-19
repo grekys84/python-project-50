@@ -94,7 +94,7 @@ def test_generate_diff_json_plain() -> None:
     assert result == expected
 
 
-def test_generate_diff_json_plain() -> None:
+def test_generate_diff_yaml_plain() -> None:
     file1 = get_fixture_path('nested_file1.yaml')
     file2 = get_fixture_path('nested_file2.yaml')
     expected = read_fixture('expected_output_plain.txt')
