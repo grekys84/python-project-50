@@ -1,5 +1,5 @@
-from hexlet_code.formatters.stylish import format_diff_stylish
 from hexlet_code.formatters.plain import format_diff_plain
+from hexlet_code.formatters.stylish import format_diff_stylish
 
 
 def format_diff(diff_tree, format_name: str):

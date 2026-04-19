@@ -1,5 +1,5 @@
-from hexlet_code.scripts.parser import parse_file
 from hexlet_code.formatters import format_diff
+from hexlet_code.scripts.parser import parse_file
 
 
 def build_diff(data1: dict, data2: dict) -> list[dict]:
