@@ -100,7 +100,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
         elif status == 'nested':
             children = node['children']
             line = (
-                f'{current_indent}  {key}: '
+                f'{current_indent}  {key}:'
                 f'{format_diff_stylish(children, depth + 1)}'
             )
 
