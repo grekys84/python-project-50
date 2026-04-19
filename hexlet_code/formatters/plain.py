@@ -1,4 +1,5 @@
-def format_value(value):
+def format_value(value) -> str:
+    """Преобразует значение в строку для plain-формата."""
     if isinstance(value, dict):
         return '[complex value]'
     if isinstance(value, str):
@@ -10,7 +11,8 @@ def format_value(value):
     return str(value)
 
 
-def format_diff_plain(diff_tree, parent=''):
+def format_diff_plain(diff_tree: list[dict], parent: str = ''):
+    """Рекурсивно форматирует дерево различий в плоский текстовый вид."""
     lines = []
 
     for node in diff_tree:

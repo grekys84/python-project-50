@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from hexlet_code.scripts.diff_builder import generate_diff
@@ -85,6 +86,7 @@ def test_generate_diff_yaml_nested() -> None:
 
 
 def test_generate_diff_json_plain() -> None:
+    """Тестирует сравнение вложенных JSON-файлов в формате plain."""
     file1 = get_fixture_path('nested_file1.json')
     file2 = get_fixture_path('nested_file2.json')
     expected = read_fixture('expected_output_plain.txt')
@@ -95,6 +97,7 @@ def test_generate_diff_json_plain() -> None:
 
 
 def test_generate_diff_yaml_plain() -> None:
+    """Тестирует сравнение вложенных YAML-файлов в формате plain."""
     file1 = get_fixture_path('nested_file1.yaml')
     file2 = get_fixture_path('nested_file2.yaml')
     expected = read_fixture('expected_output_plain.txt')
@@ -102,3 +105,18 @@ def test_generate_diff_yaml_plain() -> None:
     result = generate_diff(file1, file2, format_name='plain')
 
     assert result == expected
+
+
+def test_generate_diff_json_files_json() -> None:
+    """Тестирует сравнение вложенных JSON-файлов в формате json."""
+    file1 = get_fixture_path('nested_file1.json')
+    file2 = get_fixture_path('nested_file2.json')
+
+    result = generate_diff(file1, file2, format_name='json')
+
+    # Проверяем, что это валидный JSON
+    parsed = json.loads(result)
+
+    assert isinstance(parsed, list)
+    assert parsed[0]['key'] == 'common'
+

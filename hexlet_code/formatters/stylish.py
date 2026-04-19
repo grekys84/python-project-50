@@ -1,4 +1,4 @@
-def format_value(value, depth=0) -> str:
+def format_value(value, depth: int = 0) -> str:
     """
     Форматирует значение для отображения в диффе.
 
@@ -118,5 +118,5 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
 
         lines.append(line)
 
-    lines.append(f'{bracket_indent}}}')  # Заканчиваем блок фигурной скобкой
+    lines.append(f'{bracket_indent}}}')
     return '\n'.join(lines)
