@@ -64,10 +64,12 @@ def generate_diff(
     Args:
         first_file_path: Путь к первому файлу.
         second_file_path: Путь ко второму файлу.
+        format_name: Формат представления диффа
 
     Returns:
         Строковое представление диффа в формате 'stylish' или
         'plain'.
+
     """
     # Читаем и парсим оба файла
     data1 = parse_file(first_file_path)

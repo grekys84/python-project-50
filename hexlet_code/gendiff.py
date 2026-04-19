@@ -31,9 +31,7 @@ def main():
 
     # Вызываем функцию сравнения и печатаем результат
     diff_result = generate_diff(
-        args.first_file,
-        args.second_file,
-        format_name=args.format_name
+        args.first_file, args.second_file, format_name=args.format_name
     )
     print(diff_result)
 
