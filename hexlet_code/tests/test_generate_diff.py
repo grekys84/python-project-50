@@ -46,7 +46,7 @@ def test_generate_diff_json_flat() -> None:
     file2 = get_fixture_path('flat_file2.json')
     expected = read_fixture('expected_output_flat.txt')
 
-    result = generate_diff(file1, file2, format='stylish')
+    result = generate_diff(file1, file2, format_name='stylish')
 
     assert result == expected
 
@@ -57,7 +57,7 @@ def test_generate_diff_yaml_flat() -> None:
     file2 = get_fixture_path('flat_file2.yaml')
     expected = read_fixture('expected_output_flat.txt')
 
-    result = generate_diff(file1, file2, format='stylish')
+    result = generate_diff(file1, file2, format_name='stylish')
 
     assert result == expected
 
@@ -68,7 +68,7 @@ def test_generate_diff_json_nested() -> None:
     file2 = get_fixture_path('nested_file2.json')
     expected = read_fixture('expected_output_nested.txt')
 
-    result = generate_diff(file1, file2, format='stylish')
+    result = generate_diff(file1, file2, format_name='stylish')
 
     assert result == expected
 
@@ -79,6 +79,6 @@ def test_generate_diff_yaml_nested() -> None:
     file2 = get_fixture_path('nested_file2.yaml')
     expected = read_fixture('expected_output_nested.txt')
 
-    result = generate_diff(file1, file2, format='stylish')
+    result = generate_diff(file1, file2, format_name='stylish')
 
     assert result == expected
