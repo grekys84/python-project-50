@@ -32,7 +32,7 @@ def read_fixture(filename: str) -> str:
         return f.read().strip()
 
 
-def test_generate_diff_json() -> None:
+def test_generate_diff_json_flat() -> None:
     """
     Проверяет корректность генерации диффа для JSON-файлов.
 
@@ -42,20 +42,42 @@ def test_generate_diff_json() -> None:
         с ожидаемым выводом в формате 'stylish'
 
     """
-    file1 = get_fixture_path('file1.json')
-    file2 = get_fixture_path('file2.json')
-    expected = read_fixture('expected_output.txt')
+    file1 = get_fixture_path('flat_file1.json')
+    file2 = get_fixture_path('flat_file2.json')
+    expected = read_fixture('expected_output_flat.txt')
 
     result = generate_diff(file1, file2, format='stylish')
 
     assert result == expected
 
 
-def test_generate_diff_yaml() -> None:
+def test_generate_diff_yaml_flat() -> None:
     """Тестирует сравнение плоских YAML-файлов."""
-    file1 = get_fixture_path('file1.yaml')
-    file2 = get_fixture_path('file2.yaml')
-    expected = read_fixture('expected_output.txt')
+    file1 = get_fixture_path('flat_file1.yaml')
+    file2 = get_fixture_path('flat_file2.yaml')
+    expected = read_fixture('expected_output_flat.txt')
+
+    result = generate_diff(file1, file2, format='stylish')
+
+    assert result == expected
+
+
+def test_generate_diff_json_nested() -> None:
+    """Тестирует сравнение вложенных json-файлов."""
+    file1 = get_fixture_path('nested_file1.json')
+    file2 = get_fixture_path('nested_file2.json')
+    expected = read_fixture('expected_output_nested.txt')
+
+    result = generate_diff(file1, file2, format='stylish')
+
+    assert result == expected
+
+
+def test_generate_diff_yaml_nested() -> None:
+    """Тестирует сравнение вложенных YAML-файлов."""
+    file1 = get_fixture_path('nested_file1.yaml')
+    file2 = get_fixture_path('nested_file2.yaml')
+    expected = read_fixture('expected_output_nested.txt')
 
     result = generate_diff(file1, file2, format='stylish')
 

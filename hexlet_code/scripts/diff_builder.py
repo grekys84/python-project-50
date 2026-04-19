@@ -28,6 +28,12 @@ def build_diff(data1: dict, data2: dict) -> list[dict]:
         # Ключ есть только в первом файле - удален
         elif key not in data2:
             diff.append({'key': key, 'status': 'removed', 'value': value1})
+        elif isinstance(value1, dict) and isinstance(value2, dict):
+            diff.append({
+                'key': key,
+                'status': 'nested',
+                'children': build_diff(value1, value2),
+            })
         # Ключ есть в обоих, но значения отличаются - обновлен
         elif value1 != value2:
             diff.append({
@@ -66,29 +72,51 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
     for node in diff_tree:
         key = node['key']
         status = node['status']
-        value = node['value']
 
         # Форматируем строку в зависимости от статуса узла
         if status == 'added':
             # Значение добавлено во второй файл (+)
-            line = f'{current_indent}+ {key}: {format_value(value, depth)}'
+            value = node['value']
+            value_str = format_value(value, depth)
+            line = (
+                f'{current_indent}+ {key}:' + (f' {value_str}' if value_str != '' else '')
+            )
+
         elif status == 'removed':
             # Значение удалено из первого файла (-)
-            line = f'{current_indent}- {key}: {format_value(value, depth)}'
+            value = node['value']
+            value_str = format_value(value, depth)
+            line = (
+                f'{current_indent}- {key}:' + (f' {value_str}' if value_str != '' else '')
+            )
+
         elif status == 'updated':
             # Значение обновилось: сначала старое (-), потом новое (+)
             old_value = node['old_value']
-            line_old = (
-                f'{current_indent}- {key}: {format_value(old_value, depth)}'
-            )
-            line_new = f'{current_indent}+ {key}: {format_value(value, depth)}'
+            new_value = node['value']
+
+            old_str = format_value(old_value, depth)
+            new_str = format_value(new_value, depth)
+
+            line_old = f'{current_indent}- {key}:' + (f' {old_str}' if old_str != '' else '')
+            line_new = f'{current_indent}+ {key}:' + (f' {new_str}' if new_str != '' else '')
             lines.append(line_old)
             lines.append(line_new)
             # Пропускаем добавление одной строки, так как добавили две
             continue
+
+        elif status == 'nested':
+            children = node['children']
+            line = f'{current_indent}  {key}: {format_diff_stylish(children, depth + 1)}'
+
         elif status == 'unchanged':
             # Значение не изменилось
-            line = f'{current_indent}  {key}: {format_value(value, depth)}'
+            value = node['value']
+            value_str = format_value(value, depth)
+            line = (
+                f'{current_indent}  {key}:' + (f' {value_str}' if value_str != '' else '')
+            )
+
         else:
             # Неожиданный статус
             line = f'{current_indent}  {key}: <неизвестный_статус_{status}>'
@@ -116,8 +144,8 @@ def format_value(value, depth=0) -> str:
     """
     if isinstance(value, dict):
         indent_size = 4
-        current_indent = ' ' * (depth * indent_size)
-        bracket_indent = ' ' * ((depth - 1) * indent_size)
+        current_indent = ' ' * ((depth + 1) * indent_size)
+        bracket_indent = ' ' * (depth * indent_size)
 
         lines = ['{']
 
@@ -141,7 +169,7 @@ def format_value(value, depth=0) -> str:
 def generate_diff(
     first_file_path: str,
     second_file_path: str,
-    format: str = 'stylish',
+    format_name: str = 'stylish',
 ) -> str:
     """
     Генерирует дифф между двумя файлами конфигурации.
@@ -161,5 +189,5 @@ def generate_diff(
     diff_tree = build_diff(data1, data2)
 
     # Форматируем дерево в строку 'stylish'
-    if format == 'stylish':
+    if format_name == 'stylish':
         return format_diff_stylish(diff_tree)

@@ -21,7 +21,7 @@ def main():
     )
     parser.add_argument(
         '-f',
-        '--format',
+        '--format_name',
         default='stylish',
         metavar='{FORMAT}',
         help='Выберите формат вывода (По умолчанию: %(default)s)',
@@ -30,7 +30,11 @@ def main():
     args = parser.parse_args()
 
     # Вызываем функцию сравнения и печатаем результат
-    diff_result = generate_diff(args.first_file, args.second_file)
+    diff_result = generate_diff(
+        args.first_file,
+        args.second_file,
+        format_name=args.format_name
+    )
     print(diff_result)
 
 
