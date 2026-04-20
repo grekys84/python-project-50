@@ -34,15 +34,7 @@ def read_fixture(filename: str) -> str:
 
 
 def test_generate_diff_json_flat() -> None:
-    """
-    Проверяет корректность генерации диффа для JSON-файлов.
-
-    Тест:
-    - загружает два JSON-файла с различиями
-    - сравнивает результат работы generate_diff
-        с ожидаемым выводом в формате 'stylish'
-
-    """
+    """Проверяет корректность генерации диффа для JSON-файлов."""
     file1 = get_fixture_path('flat_file1.json')
     file2 = get_fixture_path('flat_file2.json')
     expected = read_fixture('expected_output_flat.txt')
