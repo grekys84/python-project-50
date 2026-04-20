@@ -34,9 +34,6 @@ def format_value(value, depth: int = 0) -> str:
     if value is None:
         return 'null'
 
-    if value == 0:
-        return ''
-
     return str(value)
 
 
