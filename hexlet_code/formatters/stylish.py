@@ -67,7 +67,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             value = node['value']
             value_str = format_value(value, depth)
             line = f'{current_indent}+ {key}:' + (
-                f' {value_str}' if value_str != '' else ''
+                f' {value_str}'
             )
 
         elif status == 'removed':
@@ -75,7 +75,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             value = node['value']
             value_str = format_value(value, depth)
             line = f'{current_indent}- {key}:' + (
-                f' {value_str}' if value_str != '' else ''
+                f' {value_str}'
             )
 
         elif status == 'updated':
@@ -87,10 +87,10 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             new_str = format_value(new_value, depth)
 
             line_old = f'{current_indent}- {key}:' + (
-                f' {old_str}' if old_str != '' else ''
+                f' {old_str}'
             )
             line_new = f'{current_indent}+ {key}:' + (
-                f' {new_str}' if new_str != '' else ''
+                f' {new_str}'
             )
             lines.append(line_old)
             lines.append(line_new)
@@ -107,7 +107,7 @@ def format_diff_stylish(diff_tree: list[dict], depth: int = 1) -> str:
             value = node['value']
             value_str = format_value(value, depth)
             line = f'{current_indent}  {key}:' + (
-                f' {value_str}' if value_str != '' else ''
+                f' {value_str}'
             )
 
         else:
