@@ -32,7 +32,7 @@ def format_value(value, depth: int = 0) -> str:
         return str(value).lower()
 
     if value is None:
-        return 'null'
+        return ''
 
     return str(value)
 
